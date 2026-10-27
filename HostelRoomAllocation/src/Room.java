@@ -28,7 +28,23 @@ public class Room {
     }
 
     public void setOccupied(int occupied) {
-        this.occupied = occupied;
+        if (occupied >= 0 && occupied <= capacity) {
+            this.occupied = occupied;
+        }
+    }
+
+    public boolean occupyPlace() {
+        if (!isAvailable()) {
+            return false;
+        }
+        occupied++;
+        return true;
+    }
+
+    public void vacatePlace() {
+        if (occupied > 0) {
+            occupied--;
+        }
     }
 
     public int getAvailableSpaces() {
@@ -37,5 +53,9 @@ public class Room {
 
     public boolean isAvailable() {
         return occupied < capacity;
+    }
+
+    public int getFloor() {
+        return (roomNumber - 101) / 20 + 1;
     }
 }
